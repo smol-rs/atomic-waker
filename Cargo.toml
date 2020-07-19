@@ -1,0 +1,16 @@
+[package]
+name = "atomic-waker"
+version = "1.0.0"
+authors = ["Stjepan Glavina <stjepang@gmail.com>"]
+edition = "2018"
+description = "A synchronization primitive for task wakeup"
+license = "Apache-2.0 OR MIT"
+repository = "https://github.com/stjepang/futures-lite"
+homepage = "https://github.com/stjepang/futures-lite"
+documentation = "https://docs.rs/futures-lite"
+keywords = ["waker", "notify", "wake", "futures", "async"]
+categories = ["asynchronous", "concurrency"]
+readme = "README.md"
+
+[dev-dependencies]
+futures = "0.3.5"
