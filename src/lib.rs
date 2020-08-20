@@ -2,7 +2,7 @@
 
 use std::cell::UnsafeCell;
 use std::fmt;
-use std::sync::atomic::AtomicUsize;
+use std::sync::atomic::{self, AtomicUsize};
 use std::sync::atomic::Ordering::{Acquire, Release, AcqRel};
 use std::task::Waker;
 
@@ -330,6 +330,9 @@ impl AtomicWaker {
                 // could also spin here trying to acquire the lock
                 // to register).
                 waker.wake_by_ref();
+
+                // This is equivalent to a spin lock, so use a spin hint.
+                atomic::spin_loop_hint();
             }
             state => {
                 // In this case, a concurrent thread is holding the
