@@ -1,9 +1,9 @@
 # atomic-waker
 
-[![Build](https://github.com/stjepang/atomic-waker/workflows/Build%20and%20test/badge.svg)](
-https://github.com/stjepang/atomic-waker/actions)
+[![Build](https://github.com/smol-rs/atomic-waker/workflows/Build%20and%20test/badge.svg)](
+https://github.com/smol-rs/atomic-waker/actions)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](
-https://github.com/stjepang/atomic-waker)
+https://github.com/smol-rs/atomic-waker)
 [![Cargo](https://img.shields.io/crates/v/atomic-waker.svg)](
 https://crates.io/crates/atomic-waker)
 [![Documentation](https://docs.rs/atomic-waker/badge.svg)](
