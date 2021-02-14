@@ -13,7 +13,6 @@ homepage = "https://github.com/smol-rs/atomic-waker"
 documentation = "https://docs.rs/atomic-waker"
 keywords = ["waker", "notify", "wake", "futures", "async"]
 categories = ["asynchronous", "concurrency"]
-readme = "README.md"
 
 [dev-dependencies]
 futures = "0.3.5"
