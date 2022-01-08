@@ -6,6 +6,7 @@ authors = [
   "Contributors to futures-rs",
 ]
 edition = "2018"
+rust-version = "1.36"
 description = "A synchronization primitive for task wakeup"
 license = "Apache-2.0 OR MIT"
 repository = "https://github.com/smol-rs/atomic-waker"
@@ -13,6 +14,7 @@ homepage = "https://github.com/smol-rs/atomic-waker"
 documentation = "https://docs.rs/atomic-waker"
 keywords = ["waker", "notify", "wake", "futures", "async"]
 categories = ["asynchronous", "concurrency"]
+exclude = ["/.*"]
 
 [dev-dependencies]
 futures = "0.3.5"
