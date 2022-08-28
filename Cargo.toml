@@ -19,5 +19,9 @@ keywords = ["waker", "notify", "wake", "futures", "async"]
 categories = ["asynchronous", "concurrency"]
 exclude = ["/.*"]
 
+[dependencies]
+# Uses user-provided critical sections on targets without atomics.
+atomic-polyfill = { version = "1", optional = true }
+
 [dev-dependencies]
 futures = "0.3.5"

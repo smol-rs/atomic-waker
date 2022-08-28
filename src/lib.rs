@@ -1,10 +1,26 @@
 //! `futures::task::AtomicWaker` extracted into its own crate.
+//! 
+//! # Features
+//! 
+//! This crate adds a feature, `atomic-polyfill`, which uses a polyfill
+//! from the [`atomic-polyfill`] crate in order to provide functionality
+//! to targets without atomics. See the [`README`] for the [`atomic-polyfill`]
+//! crate for more information on how this is implemented by the end-user.
+//! 
+//! [`atomic-polyfill`]: https://crates.io/crates/atomic-polyfill
+//! [`README`]: https://github.com/embassy-rs/atomic-polyfill/blob/main/README.md
 
-use std::cell::UnsafeCell;
-use std::fmt;
-use std::sync::atomic::AtomicUsize;
-use std::sync::atomic::Ordering::{AcqRel, Acquire, Release};
-use std::task::Waker;
+#![no_std]
+
+use core::cell::UnsafeCell;
+use core::fmt;
+use core::sync::atomic::Ordering::{AcqRel, Acquire, Release};
+use core::task::Waker;
+
+#[cfg(not(feature = "atomic-polyfill"))]
+use core::sync::atomic::AtomicUsize;
+#[cfg(feature = "atomic-polyfill")]
+use atomic_polyfill::AtomicUsize;
 
 /// A synchronization primitive for task wakeup.
 ///
