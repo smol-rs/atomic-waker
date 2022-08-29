@@ -17,10 +17,10 @@ use core::fmt;
 use core::sync::atomic::Ordering::{AcqRel, Acquire, Release};
 use core::task::Waker;
 
-#[cfg(feature = "portable-atomic")]
-use portable_atomic::AtomicUsize;
 #[cfg(not(feature = "portable-atomic"))]
 use core::sync::atomic::AtomicUsize;
+#[cfg(feature = "portable-atomic")]
+use portable_atomic::AtomicUsize;
 
 /// A synchronization primitive for task wakeup.
 ///
