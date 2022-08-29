@@ -17,9 +17,9 @@ use core::fmt;
 use core::sync::atomic::Ordering::{AcqRel, Acquire, Release};
 use core::task::Waker;
 
-#[cfg(feature = "atomic-polyfill")]
-use atomic_polyfill::AtomicUsize;
-#[cfg(not(feature = "atomic-polyfill"))]
+#[cfg(feature = "portable-atomic")]
+use portable_atomic::AtomicUsize;
+#[cfg(not(feature = "portable-atomic"))]
 use core::sync::atomic::AtomicUsize;
 
 /// A synchronization primitive for task wakeup.
