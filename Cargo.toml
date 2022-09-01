@@ -19,5 +19,9 @@ keywords = ["waker", "notify", "wake", "futures", "async"]
 categories = ["asynchronous", "concurrency"]
 exclude = ["/.*"]
 
+[dependencies]
+# Uses portable-atomic polyfill atomics on targets without them 
+portable-atomic = { version = "0.3", optional = true, default-features = false }
+
 [dev-dependencies]
 futures = "0.3.5"

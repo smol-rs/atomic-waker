@@ -1,10 +1,26 @@
 //! `futures::task::AtomicWaker` extracted into its own crate.
+//!
+//! # Features
+//!
+//! This crate adds a feature, `portable-atomic`, which uses a polyfill
+//! from the [`portable-atomic`] crate in order to provide functionality
+//! to targets without atomics. See the [`README`] for the [`portable-atomic`]
+//! crate for more information on how to use it on single-threaded targets.
+//!
+//! [`portable-atomic`]: https://crates.io/crates/portable-atomic
+//! [`README`]: https://github.com/taiki-e/portable-atomic/blob/main/README.md#optional-cfg
 
-use std::cell::UnsafeCell;
-use std::fmt;
-use std::sync::atomic::AtomicUsize;
-use std::sync::atomic::Ordering::{AcqRel, Acquire, Release};
-use std::task::Waker;
+#![no_std]
+
+use core::cell::UnsafeCell;
+use core::fmt;
+use core::sync::atomic::Ordering::{AcqRel, Acquire, Release};
+use core::task::Waker;
+
+#[cfg(not(feature = "portable-atomic"))]
+use core::sync::atomic::AtomicUsize;
+#[cfg(feature = "portable-atomic")]
+use portable_atomic::AtomicUsize;
 
 /// A synchronization primitive for task wakeup.
 ///
