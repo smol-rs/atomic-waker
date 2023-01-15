@@ -5,7 +5,7 @@
 //! This crate adds a feature, `portable-atomic`, which uses a polyfill
 //! from the [`portable-atomic`] crate in order to provide functionality
 //! to targets without atomics. See the [`README`] for the [`portable-atomic`]
-//! crate for more information on how to use it on single-threaded targets.
+//! crate for more information on how to use it.
 //!
 //! [`portable-atomic`]: https://crates.io/crates/portable-atomic
 //! [`README`]: https://github.com/taiki-e/portable-atomic/blob/main/README.md#optional-cfg
