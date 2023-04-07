@@ -1,3 +1,7 @@
+# Version 1.1.1
+
+- Use `will_wake()` to avoid unnecessary cloning. (#12)
+
 # Version 1.1.0
 
 - Support `no_std` platforms. (#7)
