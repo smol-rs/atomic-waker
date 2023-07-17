@@ -11,6 +11,12 @@
 //! [`README`]: https://github.com/taiki-e/portable-atomic/blob/main/README.md#optional-cfg
 
 #![no_std]
+#![doc(
+    html_favicon_url = "https://raw.githubusercontent.com/smol-rs/smol/master/assets/images/logo_fullsize_transparent.png"
+)]
+#![doc(
+    html_logo_url = "https://raw.githubusercontent.com/smol-rs/smol/master/assets/images/logo_fullsize_transparent.png"
+)]
 
 use core::cell::UnsafeCell;
 use core::fmt;
