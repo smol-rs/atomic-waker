@@ -1,3 +1,7 @@
+# Version 1.1.2
+
+- Add `smol-rs` logo to docs. (#16)
+
 # Version 1.1.1
 
 - Use `will_wake()` to avoid unnecessary cloning. (#12)
