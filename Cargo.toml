@@ -22,7 +22,7 @@ exclude = ["/.*"]
 portable-atomic = { version = "1", optional = true, default-features = false }
 
 [dev-dependencies]
-criterion = { version = "0.6.0", default-features = false, features = ["cargo_bench_support"] }
+criterion = { version = "0.6", default-features = false, features = ["cargo_bench_support"] }
 futures = "0.3.5"
 rayon = "1.7.0"
 
