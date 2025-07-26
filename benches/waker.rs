@@ -1,6 +1,9 @@
-use atomic_waker::AtomicWaker;
-use criterion::{black_box, criterion_group, criterion_main, BenchmarkGroup, Criterion};
+#![allow(clippy::incompatible_msrv)] // false positive: https://github.com/rust-lang/rust-clippy/issues/12257#issuecomment-2093667187
 
+use atomic_waker::AtomicWaker;
+use criterion::{criterion_group, criterion_main, BenchmarkGroup, Criterion};
+
+use std::hint::black_box;
 use std::sync::Arc;
 use std::task::{Wake, Waker};
 
