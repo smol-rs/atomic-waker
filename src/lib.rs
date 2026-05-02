@@ -20,6 +20,7 @@
 
 use core::cell::UnsafeCell;
 use core::fmt;
+use core::panic::{RefUnwindSafe, UnwindSafe};
 use core::sync::atomic::Ordering::{AcqRel, Acquire, Release};
 use core::task::Waker;
 
@@ -458,3 +459,9 @@ impl fmt::Debug for AtomicWaker {
 
 unsafe impl Send for AtomicWaker {}
 unsafe impl Sync for AtomicWaker {}
+
+// SAFETY: all accesses to the UnsafeCell are guarded by atomic operations.
+// In the unlikely event where waker.clone would panic, we restore the previous atomic state to heal
+// ourselves and not get indefinitely stuck in REGISTERING when unwinding.
+impl UnwindSafe for AtomicWaker {}
+impl RefUnwindSafe for AtomicWaker {}

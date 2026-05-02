@@ -9,7 +9,7 @@ authors = [
   "Contributors to futures-rs",
 ]
 edition = "2018"
-rust-version = "1.36"
+rust-version = "1.56"
 description = "A synchronization primitive for task wakeup"
 license = "Apache-2.0 OR MIT"
 repository = "https://github.com/smol-rs/atomic-waker"
