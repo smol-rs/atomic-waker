@@ -20,6 +20,7 @@
 
 use core::cell::UnsafeCell;
 use core::fmt;
+use core::panic::{RefUnwindSafe, UnwindSafe};
 use core::sync::atomic::Ordering::{AcqRel, Acquire, Release};
 use core::task::Waker;
 
@@ -296,7 +297,22 @@ impl AtomicWaker {
                     // Avoid cloning the waker if the old waker will awaken the same task.
                     match &*self.waker.get() {
                         Some(old_waker) if old_waker.will_wake(waker) => (),
-                        _ => *self.waker.get() = Some(waker.clone()),
+                        _ => {
+                            // If `waker.clone()` panics, we would end up permanently stuck in REGISTERING
+                            // state. Let's add a safeguard that resets it to WAITING in that specific case.
+                            struct ResetOnDrop<'a>(&'a AtomicUsize);
+                            impl Drop for ResetOnDrop<'_> {
+                                fn drop(&mut self) {
+                                    self.0.swap(WAITING, AcqRel);
+                                }
+                            }
+                            let guard = ResetOnDrop(&self.state);
+
+                            *self.waker.get() = Some(waker.clone());
+
+                            // Now that clone is done, let's defuse the safeguard.
+                            core::mem::forget(guard);
+                        }
                     }
 
                     // Release the lock. If the state transitioned to include
@@ -443,3 +459,9 @@ impl fmt::Debug for AtomicWaker {
 
 unsafe impl Send for AtomicWaker {}
 unsafe impl Sync for AtomicWaker {}
+
+// SAFETY: all accesses to the UnsafeCell are guarded by atomic operations.
+// In the unlikely event where waker.clone would panic, we restore the previous atomic state to heal
+// ourselves and not get indefinitely stuck in REGISTERING when unwinding.
+impl UnwindSafe for AtomicWaker {}
+impl RefUnwindSafe for AtomicWaker {}
